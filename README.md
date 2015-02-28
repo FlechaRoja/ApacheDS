@@ -22,7 +22,7 @@ The container can be started issuing the following command:
 
 #Usage
 
-You can manage th ldap server with the admin user *uid=admin,ou=system* and the default password *secret*. The *default* instance comes with a pre-configured partition *dc=example,dc=com*.
+You can manage the ldap server with the admin user *uid=admin,ou=system* and the default password *secret*. The *default* instance comes with a pre-configured partition *dc=example,dc=com*.
 
 An indivitual admin password should be set following [this manual](https://directory.apache.org/apacheds/basic-ug/1.4.2-changing-admin-password.html).
 
