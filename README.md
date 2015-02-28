@@ -5,6 +5,7 @@ This Docker image provides an [ApacheDS](https://directory.apache.org/apacheds/)
 
 #Build
 
+	git clone https://github.com/g17/ApacheDS.git
     docker build -t h3nrik/apacheds .
 
 
@@ -33,5 +34,7 @@ It is also possible to start up your own defined Apache DS *instance* with your 
     docker run --name ldap -d -p 389:10389 -e APACHEDS_INSTANCE=yourinstance -v /path/to/your/config.ldif:/bootstrap/conf/config.ldif:ro h3nrik/apacheds
 
 
-It would also be possible to use this ApacheDS image to provide a [Kerberos server](https://directory.apache.org/apacheds/advanced-ug/2.1-config-description.html#kerberos-server). Also other services are possible. For further information read the [configuration documentation](https://directory.apache.org/apacheds/advanced-ug/2.1-config-description.html).
+It would be possible to use this ApacheDS image to provide a [Kerberos server](https://directory.apache.org/apacheds/advanced-ug/2.1-config-description.html#kerberos-server) as well. Just provide your own *config.ldif* file for that. Don't forget to expose the right port, then.
+
+Also other services are possible. For further information read the [configuration documentation](https://directory.apache.org/apacheds/advanced-ug/2.1-config-description.html).
 
