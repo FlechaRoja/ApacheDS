@@ -1,0 +1,38 @@
+version: 1
+
+dn: dc=example,dc=com
+objectClass: extensibleObject
+objectClass: domain
+objectClass: top
+dc: example
+
+dn: ou=Users,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Users
+
+dn: ou=Groups,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Groups
+
+dn: uid=test,ou=Users,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: extensibleObject
+objectClass: uidObject
+objectClass: inetOrgPerson
+objectClass: top
+cn: Test User
+givenName: Test
+sn: User
+uid: test
+mail: test@example.com
+ou: Users
+userpassword:: {PLAIN}test
+
+dn: cn=test,ou=Groups,dc=example,dc=com
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: test
+uniquemember: uid=test,ou=Users,dc=example,dc=com
