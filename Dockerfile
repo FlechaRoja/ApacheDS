@@ -20,7 +20,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && apt-get update \
     && apt-get install -y curl procps openjdk-7-jre-headless \
     && curl --silent -o ${APACHEDS_ARCHIVE}  http://mirror.softaculous.com/apache/directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} \
-    && dpkg -i ${APACHEDS_ARCHIVE}
+    && dpkg -i ${APACHEDS_ARCHIVE} \
+	&& rm ${APACHEDS_ARCHIVE}
 
 # Ports defined by the default instance configuration:
 # 10389: ldap
@@ -39,9 +40,10 @@ ENV APACHEDS_INSTANCE default
 ENV APACHEDS_BOOTSTRAP /bootstrap
 
 ENV APACHEDS_SCRIPT run.sh
-ADD scripts/${APACHEDS_SCRIPT} /${APACHEDS_SCRIPT}
-RUN chown ${APACHEDS_USER}:${APACHEDS_GROUP} /${APACHEDS_SCRIPT} \
-    && chmod u+rx /${APACHEDS_SCRIPT}
+ENV APACHEDS_CMD /run.sh
+ADD scripts/${APACHEDS_SCRIPT} ${APACHEDS_CMD}
+RUN chown ${APACHEDS_USER}:${APACHEDS_GROUP} ${APACHEDS_CMD} \
+    && chmod u+rx ${APACHEDS_CMD}
 
 ADD instance/* ${APACHEDS_BOOTSTRAP}/conf/
 RUN mkdir ${APACHEDS_BOOTSTRAP}/cache \
@@ -54,4 +56,4 @@ RUN mkdir ${APACHEDS_BOOTSTRAP}/cache \
 # ApacheDS wrapper command
 #############################################
 
-CMD /${APACHEDS_SCRIPT}
+CMD ${APACHEDS_CMD}
