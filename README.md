@@ -33,7 +33,7 @@ Then you can import entries into that partition via your own *ldif* file. A [sam
 
 #Customization
 
-It is also possible to start up your own defined Apache DS *instance* with your own configuration for *partitions* and *services*. Therefore you need to mount your [config.ldif](instance/config.ldif) file and set the *APACHEDS_INSTANCE* environment variable properly. Assuming your custom instance is called *yourinstance* the following command will do the trick:
+It is also possible to start up your own defined Apache DS *instance* with your own configuration for *partitions* and *services*. Therefore you need to mount your [config.ldif](instance/config.ldif) file and set the *APACHEDS_INSTANCE* environment variable properly. In the provided sample configuration the instance is named *default*. Assuming your custom instance is called *yourinstance* the following command will do the trick:
 
     docker run --name ldap -d -p 389:10389 -e APACHEDS_INSTANCE=yourinstance -v /path/to/your/config.ldif:/bootstrap/conf/config.ldif:ro h3nrik/apacheds
 
