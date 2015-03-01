@@ -16,12 +16,12 @@ ENV APACHEDS_GROUP apacheds
 
 VOLUME ${APACHEDS_DATA}
 
-ADD http://mirror.softaculous.com/apache/directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} /${APACHEDS_ARCHIVE}
+ADD http://mirror.softaculous.com/apache/directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} ${APACHEDS_ARCHIVE}
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
     && apt-get update \
-    && apt-get install -y procps openjdk-7-jre-headless \
+    && apt-get install -y ldap-utils procps openjdk-7-jre-headless \
     && dpkg -i ${APACHEDS_ARCHIVE} \
-	&& rm /${APACHEDS_ARCHIVE}
+	&& rm ${APACHEDS_ARCHIVE}
 
 # Ports defined by the default instance configuration:
 # 10389: ldap
