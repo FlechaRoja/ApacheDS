@@ -26,14 +26,14 @@ You can manage the ldap server with the admin user *uid=admin,ou=system* and the
 
 An indivitual admin password should be set following [this manual](https://directory.apache.org/apacheds/basic-ug/1.4.2-changing-admin-password.html).
 
-Then you can import entries into that partition via your own *ldif* file. A [sample.ldif](sample/sample.ldif) file is provided with the sources:
+Then you can import entries into that partition via your own *ldif* file. A [sample.ldif](https://github.com/g17/ApacheDS/blob/master/sample/sample.ldif) file is provided with the sources:
 
     ldapadd -v -h <your-docker-ip>:389 -c -x -D uid=admin,ou=system -w <your-admin-password> -f `pwd`/sample/sample.ldif
 
 
 #Customization
 
-It is also possible to start up your own defined Apache DS *instance* with your own configuration for *partitions* and *services*. Therefore you need to mount your [config.ldif](instance/config.ldif) file and set the *APACHEDS_INSTANCE* environment variable properly. In the provided sample configuration the instance is named *default*. Assuming your custom instance is called *yourinstance* the following command will do the trick:
+It is also possible to start up your own defined Apache DS *instance* with your own configuration for *partitions* and *services*. Therefore you need to mount your [config.ldif](https://github.com/g17/ApacheDS/blob/master/instance/config.ldif) file and set the *APACHEDS_INSTANCE* environment variable properly. In the provided sample configuration the instance is named *default*. Assuming your custom instance is called *yourinstance* the following command will do the trick:
 
     docker run --name ldap -d -p 389:10389 -e APACHEDS_INSTANCE=yourinstance -v /path/to/your/config.ldif:/bootstrap/conf/config.ldif:ro h3nrik/apacheds
 
